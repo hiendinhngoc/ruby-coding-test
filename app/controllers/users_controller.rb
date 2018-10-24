@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :create_history]
 
   # GET /users
   def index
@@ -22,12 +22,18 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.create(user_params)
+    if @user.save
+      create_history
+    end
     redirect_to @user, notice: 'User was successfully created.'
   end
 
   # PATCH/PUT /users/1
   def update
     @user.update(user_params)
+    if @user.save
+      create_history
+    end
     redirect_to @user, notice: 'User was successfully updated.'
   end
 
@@ -35,6 +41,10 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy unless @user.is_admin?
     redirect_to users_url, notice: 'User was successfully destroyed.'
+  end
+
+  def create_history
+    @histories = @user.histories.create(user_email: params[:user][:email])
   end
 
   private

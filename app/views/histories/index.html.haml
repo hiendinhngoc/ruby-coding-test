@@ -1,0 +1,21 @@
+%p#notice= notice
+.container-fluid
+  %ol.breadcrumb
+    %h1 Histories
+    .col-lg-12
+      %table.tg
+        %thead
+          %tr
+            %th.center User
+            %th.center User Email
+            %th.center Updated At
+            %th.center{:colspan => "3"}
+        %tbody
+          - @histories.each do |history|
+            %tr
+              %td.center= history.user.firstname
+              %td.center= history.user_email
+              %td.center= history.updated_at
+              %td.center= link_to 'Show', history_path(history)
+      %br/
+      = link_to 'Back', user_path(@user)

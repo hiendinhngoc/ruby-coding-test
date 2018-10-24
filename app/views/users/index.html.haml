@@ -1,0 +1,23 @@
+%p#notice= notice
+.container-fluid
+  %ol.breadcrumb
+    %h1 Users
+    .col-lg-12
+      %table.tg.text-center
+        %thead
+          %tr
+            %th.center Email
+            %th.center Firstname
+            %th.center Last name
+            %th.center{:colspan => "3"}
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td.center= user.email
+              %td.center= user.firstname
+              %td.center= user.last_name
+              %td.center= link_to 'Show', user
+              %td.center= link_to 'Edit', edit_user_path(user)
+              %td.center= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+      %br/
+      = link_to 'New User', new_user_path

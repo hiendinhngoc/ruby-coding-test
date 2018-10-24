@@ -1,0 +1,15 @@
+%p#notice= notice
+.container-fluid
+  %p
+    %strong User:
+    = @history.user.firstname
+  %p
+    %strong User Email:
+    = @history.user_email
+  %p
+    %strong Created At:
+    = @history.created_at
+  %p
+    %strong Updated At:
+    = @history.updated_at
+  = link_to 'Back', user_histories_path(@history.user)

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :histories
+  has_many :histories, independent: :destroy
   validates :email, uniqueness: true
 
   before_validation do
